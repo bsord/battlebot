@@ -95,8 +95,18 @@ function Body({ type, g }) {
           ))}
         </g>
       );
-    case "pin1":
-    case "dupont2": {
+    case "dupont2":
+      if (g === "m") {
+        // crimped male pins in a 2-pin housing, pins sticking out
+        return (
+          <g>
+            <rect x={-L} y={-H / 2} width={L * 0.6} height={H} rx="0.8" fill="#1b1b1b" />
+            {[-H / 4, H / 4].map((y) => <rect key={y} x={-L * 0.4} y={y - 0.5} width={L * 0.4} height="1" fill={GOLD} />)}
+          </g>
+        );
+      }
+    // falls through: the female is a plain socket housing
+    case "pin1": {
       const holes = type === "pin1" ? [0] : [-H / 4, H / 4];
       return (
         <g>

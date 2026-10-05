@@ -14,6 +14,7 @@
 //           dock: "a" or "b" draws the pair flush against that end, for adapters with no wire.
 //           atHeader draws just the lead's plug seated on the a end's pins (receiver leads).
 //           perWire draws a plug pair on each wire of the bundle (the motor's three bullets).
+//           note is a small caption under the plug.
 
 export const SCALE = 3; // px per mm in the assembled view
 export const WEIGHT_LIMIT = 454; // 1lb antweight
@@ -31,7 +32,11 @@ export const products = {
   bldc: { group: "Motors", g: 47, onBot: 1, gSrc: "listing", short: "QWinOut A2212 2200KV", name: "QWinOut A2212 2200KV brushless motor", qty: "1", spec: "2-3S, 3.5mm bullets pre-installed (match the ESC). Closest Amazon match to 2205KV", url: "https://www.amazon.com/dp/B07SGPVMWD", price: "$12.99" },
   n20: { group: "Motors", g: 10, onBot: 2, gSrc: "estimate", gNote: "N20 gear motor is about 9-10g, plus 150mm leads", short: "N20 12V 500rpm", name: "N20 12V 500rpm, pre-wired leads", qty: "3 (2 + spare)", buy: 3, spec: "Select \"12v 500rpm\". Price is per motor", url: "https://www.amazon.com/dp/B0B17TDL9S", price: "$16.90 ea" },
   wheel: { group: "Motors", g: 5, botName: "K346 wheel 43×19mm", onBot: 2, gSrc: "estimate", gNote: "Thin rubber tire on a plastic hub", short: "K346 43×19mm", name: "K346 wheel 43×19mm, 3mm D bore, 10 pack", qty: "1 pack", spec: "", url: "https://www.amazon.com/dp/B07YY6TN42", price: "$14.65" },
-  n20screws: { group: "Optional (not in the total)", alt: true, name: "M1-M1.6 micro screw kit, 600 pcs", qty: "1", spec: "N20 gearbox mounts use M1.6", url: "https://www.amazon.com/dp/B071DXG8D4", price: "$11.39" },
+  bearings: { group: "Weapon drive", name: "Cavory ball bearing assortment, 52 pcs", qty: "1", spec: "10 sizes from MR63 (3×6mm) up to 608 (8×22mm)", url: "https://www.amazon.com/dp/B0H1MBRW5N", price: "$9.99" },
+  belts: { group: "Weapon drive", name: "uxcell GT2 closed loop belts, 8 pcs", qty: "1", spec: "6mm wide, 110 to 400mm long", url: "https://www.amazon.com/dp/B0CMT2LFRJ", price: "$9.49" },
+  pulley: { group: "Weapon drive", name: "GT2 16 tooth pulley", qty: "1", spec: "Select Bore 3.17mm to fit the A2212 shaft. Weapon side pulley is usually printed into the hub", url: "https://www.amazon.com/dp/B0BJZP8WPR", price: "$12.99" },
+  screwsMachine: { group: "Optional (not in the total)", alt: true, name: "M2-M5 socket head screw kit with nuts and washers, 1274 pcs", qty: "1", spec: "12.9 carbon steel machine screws. M3 for most of the bot, into nuts or heat-set inserts", url: "https://www.amazon.com/dp/B0D9QNZ1JN", price: "$12.99" },
+  screwsTapping: { group: "Optional (not in the total)", alt: true, name: "M1.7-M3 self tapping screws for plastic, 750 pcs", qty: "1", spec: "Thread straight into printed parts, for covers and light brackets", url: "https://www.amazon.com/dp/B0HDNS74R6", price: "$7.99" },
   shrink: { group: "Optional (not in the total)", alt: true, name: "Ginsco heat shrink tubing kit, 580 pcs", qty: "1", spec: "For wire joints", url: "https://www.amazon.com/dp/B01MFA3OFA", price: "$7.99" },
   zip: { group: "Optional (not in the total)", alt: true, g: 1, botName: "Zip ties, a few", onBot: 1, gSrc: "estimate", name: "Tantti 4 inch zip ties, 200 pack", qty: "1", spec: "", url: "https://www.amazon.com/dp/B0BC1VH4XB", price: "$3.99" },
   tape: { group: "Optional (not in the total)", alt: true, g: 2, onBot: 1, gSrc: "estimate", name: "3M 5925 double sided foam tape", qty: "1", spec: "Battery and electronics mounting", url: "https://www.amazon.com/dp/B0BQYM63N5", price: "$7.99" },
@@ -40,6 +45,7 @@ export const products = {
 // Weight that isn't a single product.
 export const extraWeights = [
   { name: "M3 screws and heat-set inserts, about 20", g: 12, gSrc: "estimate" },
+  { name: "Weapon drive: belt, motor pulley, 2 bearings", g: 15, gSrc: "estimate", gNote: "Depends on bearing size. Two 608s alone are about 24g" },
 ];
 
 export const nodes = [
@@ -124,7 +130,7 @@ export const nodes = [
   {
     id: "motorL", product: "n20", label: "Left drive", art: "n20",
     asm: { x: 1020, y: 318, w: 84, h: 129 },
-    ports: [{ id: "in", side: "l", at: 0.5, plug: ["bare"] }],
+    ports: [{ id: "in", side: "l", at: 0.5, plug: ["dupont2", "m"] }],
   },
   {
     id: "wheelL", product: "wheel", label: "Left wheel", art: "wheel", labelPos: "right",
@@ -134,7 +140,7 @@ export const nodes = [
   {
     id: "motorR", product: "n20", label: "Right drive", art: "n20",
     asm: { x: 1020, y: 540, w: 84, h: 129 },
-    ports: [{ id: "in", side: "l", at: 0.5, plug: ["bare"] }],
+    ports: [{ id: "in", side: "l", at: 0.5, plug: ["dupont2", "m"] }],
   },
   {
     id: "wheelR", product: "wheel", label: "Right wheel", art: "wheel", labelPos: "right",
@@ -153,9 +159,9 @@ export const connections = [
   { a: "splitter.o2", b: "adpJst.in", kind: "power", dock: "b" },
   { a: "adpJst.out", b: "desc.pwr", kind: "power", dock: "a" },
   { a: "desc.motL", b: "motorL.in", kind: "motor", t: 0.55,
-    open: "N20 leads are bare wire. Needs a way to connect, see the note" },
+    note: "crimp or solder" },
   { a: "desc.motR", b: "motorR.in", kind: "motor", t: 0.55,
-    open: "N20 leads are bare wire. Needs a way to connect, see the note" },
+    note: "crimp or solder" },
   { a: "rx.ch3", b: "escW.sig", kind: "signal", atHeader: true },
   { a: "rx.ch2", b: "desc.ch2", kind: "signal", atHeader: true },
   { a: "rx.ch1", b: "desc.ch1", kind: "signal1", atHeader: true },

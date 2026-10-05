@@ -83,7 +83,7 @@ svg .part:hover .part-hit, svg .part:focus-visible .part-hit, svg .part-active .
 svg .radio { stroke: var(--muted); stroke-width: 1.5; stroke-dasharray: 3 5; fill: none; }
 .total-cost { color: var(--ink); font-weight: 600; }
 
-/* plug letters and undecided joints */
+/* plug letters and captions */
 svg .plug-letter { font-family: system-ui, sans-serif; font-weight: 800; }
-svg .mat-open { fill: #ffb347; font: 700 12px system-ui, sans-serif; paint-order: stroke; stroke: #1e5a44; stroke-width: 4px; }
+svg .mat-note { fill: #a9d6c3; font: 11px system-ui, sans-serif; paint-order: stroke; stroke: #1e5a44; stroke-width: 4px; }
 svg .art-pin { fill: #9a9a9a; font: 600 8px system-ui, sans-serif; }

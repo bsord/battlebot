@@ -188,7 +188,7 @@ export default function Assembled() {
       {connections.filter((c) => !c.atHeader && !c.perWire && resolve(c.a).port.plug && resolve(c.b).port.plug).map((c) => {
         const A = resolve(c.a), B = resolve(c.b);
         const pa = anchor(A.node, A.port, "asm"), pb = anchor(B.node, B.port, "asm");
-        const SCALE_PLUG = 1.2, GAP = c.open ? 6 : closedGap(A.port.plug, B.port.plug);
+        const SCALE_PLUG = 1.2, GAP = closedGap(A.port.plug, B.port.plug);
         let m = pointAt(bezier(pa, A.port.side, pb, B.port.side), c.t ?? 0.5);
         if (c.dock) {
           // sit flush against the docked port, pointing straight out of it
@@ -206,8 +206,8 @@ export default function Assembled() {
         return (
           <g key={`p-${c.a}`}>
             <Pair a={left} b={right} x={m.x} y={m.y} angle={flipped ? m.angle + 180 : m.angle}
-              scale={SCALE_PLUG} gap={GAP} closed={!c.open} letters={only} />
-            {c.open && <text x={m.x} y={m.y + 18} textAnchor="middle" className="mat-open">Not decided</text>}
+              scale={SCALE_PLUG} gap={GAP} closed letters={only} />
+            {c.note && <text x={m.x} y={m.y + 16} textAnchor="middle" className="mat-note">{c.note}</text>}
           </g>
         );
       })}

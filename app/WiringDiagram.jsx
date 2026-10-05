@@ -68,7 +68,7 @@ export default function WiringDiagram() {
       <text className="small" x="955" y="369">3mm D bore</text>
       <path className="brushed" d="M670 285 H790"/>
       <path className="brushed" d="M670 305 H790"/>
-      <text className="small" x="690" y="278">M+ / M−</text><text className="small" x="690" y="322">connection not decided</text>
+      <text className="small" x="690" y="278">M+ / M−</text><text className="small" x="690" y="322">Dupont plug, crimp or solder</text>
   
       {/* Drive motor R + wheel */}
       <rect className="box" x="790" y="467" width="124" height="36" rx="4"/>
@@ -80,7 +80,7 @@ export default function WiringDiagram() {
       <text className="small" x="955" y="559">3mm D bore</text>
       <path className="brushed" d="M670 475 H790"/>
       <path className="brushed" d="M670 495 H790"/>
-      <text className="small" x="690" y="468">M+ / M−</text><text className="small" x="690" y="512">connection not decided</text>
+      <text className="small" x="690" y="468">M+ / M−</text><text className="small" x="690" y="512">Dupont plug, crimp or solder</text>
   
       {/* Transmitter, linked by radio */}
       <rect className="box" x="16" y="410" width="126" height="100" rx="6"/>

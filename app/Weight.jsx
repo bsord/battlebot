@@ -5,7 +5,7 @@ export default function Weight() {
   const rows = Object.entries(products)
     .filter(([, p]) => p.g && p.onBot)
     .map(([id, p]) => ({ id, name: p.botName ?? p.name, n: p.onBot, g: p.g, src: p.gSrc, note: p.gNote, total: p.g * p.onBot }))
-    .concat(extraWeights.map((e) => ({ id: e.name, name: e.name, n: 1, g: e.g, src: e.gSrc, total: e.g })))
+    .concat(extraWeights.map((e) => ({ id: e.name, name: e.name, n: 1, g: e.g, src: e.gSrc, note: e.gNote, total: e.g })))
     .sort((a, b) => b.total - a.total);
   const used = rows.reduce((sum, r) => sum + r.total, 0);
   const left = WEIGHT_LIMIT - used;
