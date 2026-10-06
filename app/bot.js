@@ -3,7 +3,7 @@
 // products: what you buy (one row in the parts list each). Photos live in public/parts/<id>.jpg.
 //           g is weight per unit, onBot how many go in the robot, gSrc where g came from
 //           (listing, spec or estimate).
-//           buy is how many to order when the price is per unit; alt items are left out of the total.
+//           buy is how many to order when the price is per unit; alt items start unchecked in the parts list.
 //           botName names it in the weight budget when only part of it goes in the bot.
 // nodes:    physical pieces on the diagram. `asm` is the footprint in the assembled view
 //           (3px = 1mm, top-down). labelPos: "right", "left" or "above" moves the label.
@@ -35,11 +35,11 @@ export const products = {
   belts: { group: "Weapon drive", name: "uxcell GT2 closed loop belts, 8 pcs", qty: "1", spec: "6mm wide, 110 to 400mm long", url: "https://www.amazon.com/dp/B0CMT2LFRJ", price: "$9.49" },
   orings: { group: "Weapon drive", name: "HFS O-ring kit, 419 pcs, 32 metric sizes", qty: "1", spec: "Nitrile, 3 to 50mm ID. Use the larger 2.5-3.5mm thick rings as slip belts on printed grooved pulleys", url: "https://www.amazon.com/dp/B06XCQQPXS", price: "$15.99" },
   pulley: { group: "Weapon drive", name: "WINSINN GT2 16 tooth pulley, 5mm bore, 5 pack", qty: "1 pack", spec: "For 6mm belts. Fits the RS2205's 5mm shaft. Weapon side pulley is usually printed into the hub", url: "https://www.amazon.com/dp/B077GMR328", price: "$6.99" },
-  screwsMachine: { group: "Optional (not in the total)", alt: true, name: "M2-M5 socket head screw kit with nuts and washers, 1274 pcs", qty: "1", spec: "12.9 carbon steel machine screws. M3 for most of the bot, into nuts or heat-set inserts", url: "https://www.amazon.com/dp/B0D9QNZ1JN", price: "$12.99" },
-  screwsTapping: { group: "Optional (not in the total)", alt: true, name: "M1.7-M3 self tapping screws for plastic, 750 pcs", qty: "1", spec: "Thread straight into printed parts, for covers and light brackets", url: "https://www.amazon.com/dp/B0HDNS74R6", price: "$7.99" },
-  shrink: { group: "Optional (not in the total)", alt: true, name: "Ginsco heat shrink tubing kit, 580 pcs", qty: "1", spec: "For wire joints", url: "https://www.amazon.com/dp/B01MFA3OFA", price: "$7.99" },
-  zip: { group: "Optional (not in the total)", alt: true, g: 1, botName: "Zip ties, a few", onBot: 1, gSrc: "estimate", name: "Tantti 4 inch zip ties, 200 pack", qty: "1", spec: "", url: "https://www.amazon.com/dp/B0BC1VH4XB", price: "$3.99" },
-  tape: { group: "Optional (not in the total)", alt: true, g: 2, onBot: 1, gSrc: "estimate", name: "3M 5925 double sided foam tape", qty: "1", spec: "Battery and electronics mounting", url: "https://www.amazon.com/dp/B0BQYM63N5", price: "$7.99" },
+  screwsMachine: { group: "Optional", alt: true, name: "M2-M5 socket head screw kit with nuts and washers, 1274 pcs", qty: "1", spec: "12.9 carbon steel machine screws. M3 for most of the bot, into nuts or heat-set inserts", url: "https://www.amazon.com/dp/B0D9QNZ1JN", price: "$12.99" },
+  screwsTapping: { group: "Optional", alt: true, name: "M1.7-M3 self tapping screws for plastic, 750 pcs", qty: "1", spec: "Thread straight into printed parts, for covers and light brackets", url: "https://www.amazon.com/dp/B0HDNS74R6", price: "$7.99" },
+  shrink: { group: "Optional", alt: true, name: "Ginsco heat shrink tubing kit, 580 pcs", qty: "1", spec: "For wire joints", url: "https://www.amazon.com/dp/B01MFA3OFA", price: "$7.99" },
+  zip: { group: "Optional", alt: true, g: 1, botName: "Zip ties, a few", onBot: 1, gSrc: "estimate", name: "Tantti 4 inch zip ties, 200 pack", qty: "1", spec: "", url: "https://www.amazon.com/dp/B0BC1VH4XB", price: "$3.99" },
+  tape: { group: "Optional", alt: true, g: 2, onBot: 1, gSrc: "estimate", name: "3M 5925 double sided foam tape", qty: "1", spec: "Battery and electronics mounting", url: "https://www.amazon.com/dp/B0BQYM63N5", price: "$7.99" },
 };
 
 // Weight that isn't a single product.

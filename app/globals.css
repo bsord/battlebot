@@ -30,7 +30,6 @@ th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--lin
 th { font-size: 12px; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); }
 td.qty { font-variant-numeric: tabular-nums; white-space: nowrap; }
 tr.group td { background: var(--bg); font-weight: 600; }
-tr.have td:not(:first-child) { color: var(--muted); text-decoration: line-through; }
 .table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 8px; }
 ul.notes li { margin-bottom: 8px; }
 .count { color: var(--muted); font-size: 14px; }
@@ -87,3 +86,9 @@ svg .radio { stroke: var(--muted); stroke-width: 1.5; stroke-dasharray: 3 5; fil
 svg .plug-letter { font-family: system-ui, sans-serif; font-weight: 800; }
 svg .mat-note { fill: #a9d6c3; font: 11px system-ui, sans-serif; paint-order: stroke; stroke: #1e5a44; stroke-width: 4px; }
 svg .art-pin { fill: #9a9a9a; font: 600 8px system-ui, sans-serif; }
+
+/* parts list: photos and checked/unchecked rows */
+table.parts td.thumb { width: 64px; padding: 6px; }
+table.parts td.thumb img { display: block; width: 56px; height: 56px; object-fit: contain; background: #fff; border-radius: 6px; border: 1px solid var(--line); }
+table.parts tr.unpicked td:not(:first-child) { opacity: 0.45; }
+table.parts td { vertical-align: middle; }
