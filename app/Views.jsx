@@ -5,13 +5,13 @@ import WiringDiagram from "./WiringDiagram";
 import Assembled from "./Assembled";
 
 const TABS = [
-  { id: "wiring", label: "Wiring" },
   { id: "assembled", label: "Assembled" },
+  { id: "wiring", label: "Wiring" },
 ];
 const KEY = "battlebot-view";
 
 export default function Views() {
-  const [view, setView] = useState("wiring");
+  const [view, setView] = useState("assembled");
 
   useEffect(() => {
     try {
