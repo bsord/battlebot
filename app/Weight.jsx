@@ -27,23 +27,23 @@ export default function Weight() {
       <div className="table-wrap">
         <table>
           <thead>
-            <tr><th>Part</th><th>Source</th><th>Qty</th><th>Each</th><th>Total</th></tr>
+            <tr><th>Part</th><th className="wide">Source</th><th>Qty</th><th className="wide">Each</th><th>Total</th></tr>
           </thead>
           <tbody>
             {rows.map((r) => (
               <tr key={r.id}>
                 <td>{r.name}{r.note && <div className="muted">{r.note}</div>}</td>
-                <td className={r.src === "estimate" ? "muted" : undefined}>{r.src}</td>
+                <td className={`wide ${r.src === "estimate" ? "muted" : ""}`}>{r.src}</td>
                 <td className="qty">{r.n}</td>
-                <td className="qty">~{r.g}g</td>
+                <td className="qty wide">~{r.g}g</td>
                 <td className="qty">~{r.total}g</td>
               </tr>
             ))}
             <tr className="total">
-              <td>Parts total</td><td /><td /><td /><td className="qty">~{used}g</td>
+              <td>Parts total</td><td className="wide" /><td /><td className="wide" /><td className="qty">~{used}g</td>
             </tr>
             <tr className="total">
-              <td>Left for chassis and weapon</td><td /><td /><td /><td className="qty">~{left}g</td>
+              <td>Left for chassis and weapon</td><td className="wide" /><td /><td className="wide" /><td className="qty">~{left}g</td>
             </tr>
           </tbody>
         </table>

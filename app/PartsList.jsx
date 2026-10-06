@@ -40,12 +40,12 @@ export default function PartsList() {
   const total = chosen.reduce((sum, id) => sum + lineCost(products[id]), 0);
 
   return (
-    <>
-      <h2>
-        Parts list{" "}
-        <span className="count total-cost">Total ${total.toFixed(2)}</span>{" "}
-        <span className="count">({chosen.length} of {ids.length} parts checked)</span>
-      </h2>
+    <section className="parts-section">
+      <h2>Parts list</h2>
+      <div className="parts-bar" role="status">
+        <span className="parts-bar-total">Total ${total.toFixed(2)}</span>
+        <span className="muted">{chosen.length} of {ids.length} parts checked</span>
+      </div>
       <div className="table-wrap">
         <table className="parts">
           <thead>
@@ -59,27 +59,34 @@ export default function PartsList() {
                 const line = lineCost(p);
                 return (
                   <tr key={id} className={picked[id] ? undefined : "unpicked"}>
-                    <td><input type="checkbox" id={`p-${id}`} checked={!!picked[id]} onChange={(e) => toggle(id, e.target.checked)} /></td>
+                    <td className="pick"><input type="checkbox" id={`p-${id}`} checked={!!picked[id]} onChange={(e) => toggle(id, e.target.checked)} /></td>
                     <td className="thumb">
                       {p.photo !== false && <img src={`${BASE}/parts/${id}.jpg`} alt="" loading="lazy" />}
                     </td>
-                    <td>
+                    <td className="name">
                       <label htmlFor={`p-${id}`}>{p.name}</label>
                       {p.spec && <div className="muted">{p.spec}</div>}
                     </td>
-                    <td className="qty">{p.qty}</td>
-                    <td className="qty">
+                    <td className="qty q">{p.qty}</td>
+                    <td className="qty pr">
                       {p.price || <span className="muted">not set</span>}
                       {p.buy > 1 && <div className="muted">${line.toFixed(2)} for {p.buy}</div>}
                     </td>
-                    <td>{p.url && <a href={p.url} target="_blank" rel="noreferrer">{host(p.url)} ↗</a>}</td>
+                    <td className="ln">{p.url && <a href={p.url} target="_blank" rel="noreferrer">{host(p.url)} ↗</a>}</td>
                   </tr>
                 );
               }),
             ])}
           </tbody>
+          <tfoot>
+            <tr className="total">
+              <td colSpan={4}>Total for {chosen.length} checked parts</td>
+              <td className="qty">${total.toFixed(2)}</td>
+              <td />
+            </tr>
+          </tfoot>
         </table>
       </div>
-    </>
+    </section>
   );
 }

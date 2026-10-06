@@ -34,6 +34,7 @@ export default function Views() {
           </button>
         ))}
       </div>
+      <p className="scroll-hint">Scroll sideways to see the whole diagram. Tap a part for its photo.</p>
       <div className={`panel ${view === "assembled" ? "panel-mat" : ""}`}>
         {view === "wiring" && <WiringDiagram />}
         {view === "assembled" && <Assembled />}

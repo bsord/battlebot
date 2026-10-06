@@ -92,3 +92,42 @@ table.parts td.thumb { width: 64px; padding: 6px; }
 table.parts td.thumb img { display: block; width: 56px; height: 56px; object-fit: contain; background: #fff; border-radius: 6px; border: 1px solid var(--line); }
 table.parts tr.unpicked td:not(:first-child) { opacity: 0.45; }
 table.parts td { vertical-align: middle; }
+
+/* parts list: total bar that sticks to the top while scrolling the list */
+.parts-bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 4; display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap;
+  padding: 10px 14px; margin-bottom: 8px; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; box-shadow: 0 4px 12px #0000000f; }
+.parts-bar-total { font-size: 18px; font-weight: 700; font-variant-numeric: tabular-nums; }
+table.parts tfoot td { font-weight: 700; background: var(--bg); border-bottom: 0; }
+
+.scroll-hint { display: none; color: var(--muted); font-size: 13px; margin: 0 0 8px; }
+
+@media (max-width: 640px) {
+  main { padding-top: 16px; }
+  h1 { font-size: 21px; }
+  .scroll-hint { display: block; }
+  .tabs { margin-top: 18px; }
+  .tab { flex: 1; text-align: center; }
+
+  /* parts rows become cards: checkbox and photo on the left, name on top, qty / price / link below */
+  table.parts thead { display: none; }
+  table.parts, table.parts tbody, table.parts tfoot { display: block; }
+  table.parts tbody tr:not(.group) { display: grid; grid-template-columns: 28px 56px auto minmax(0, 1fr);
+    grid-template-areas: "pick thumb name name" "pick thumb q q" "pick thumb pr ln"; gap: 4px 10px; align-items: center;
+    padding: 10px 12px; border-bottom: 1px solid var(--line); }
+  table.parts td.name { min-width: 0; overflow-wrap: anywhere; }
+  table.parts td.ln { justify-self: end; }
+  table.parts td { display: block; padding: 0; border: 0; }
+  table.parts td.pick { grid-area: pick; }
+  table.parts td.thumb { grid-area: thumb; width: auto; padding: 0; }
+  table.parts td.name { grid-area: name; }
+  table.parts td.q { grid-area: q; font-size: 13px; color: var(--muted); }
+  table.parts td.pr { grid-area: pr; font-weight: 600; }
+  table.parts td.ln { grid-area: ln; font-size: 13px; }
+  table.parts tr.group { display: block; }
+  table.parts tr.group td { padding: 8px 12px; }
+  table.parts tfoot tr { display: flex; justify-content: space-between; padding: 10px 12px; }
+  table.parts tfoot td:last-child { display: none; }
+
+  /* weight table: drop the source and per-unit columns */
+  .wide { display: none; }
+}
