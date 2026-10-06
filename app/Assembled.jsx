@@ -12,7 +12,8 @@ const WIRES = {
   signal: { colors: ["#6b3e1e", "#d62828", "#f08c00"], width: 1.6, gap: 2.2 },
   signal1: { colors: ["#f08c00"], width: 1.6, gap: 0 },
   radio: { colors: ["#bfe3ff"], width: 1.6, gap: 0, dash: "3 6" },
-  phase: { colors: ["#141414", "#141414", "#141414"], width: 2.6, gap: 10 },
+  charge: { colors: ["#e6e6e6"], width: 1.6, gap: 0, dash: "6 4" },
+  phase: { colors: ["#141414", "#141414", "#141414"], width: 2.6, gap: 3.4 },
   motor: { colors: ["#d62828", "#141414"], width: 2, gap: 2.8 },
 };
 
@@ -35,13 +36,6 @@ function pointAt([p0, p1, p2, p3], t) {
 
 function offset(p, side, d) {
   return side === "l" || side === "r" ? { x: p.x, y: p.y + d } : { x: p.x + d, y: p.y };
-}
-
-// The curve one wire of a bundle follows.
-function wireCurve(a, sa, b, sb, kind, i) {
-  const { colors, gap } = WIRES[kind];
-  const d = i * gap - ((colors.length - 1) * gap) / 2;
-  return bezier(offset(a, sa, d), sa, offset(b, sb, d), sb);
 }
 
 function Bundle({ a, sa, b, sb, kind }) {
@@ -113,7 +107,7 @@ function PartCard({ node, x, y, pinned, onClose }) {
   return (
     <div className="part-card" style={{ left, top, width: CARD_W }} role="dialog" aria-label={node.label}>
       {pinned && <button className="part-card-close" onClick={onClose} aria-label="Close">×</button>}
-      {p && p.url && <img src={`${process.env.NEXT_PUBLIC_BASE_PATH}/parts/${node.product}.jpg`} alt={p.name} />}
+      {p && p.url && p.photo !== false && <img src={`${process.env.NEXT_PUBLIC_BASE_PATH}/parts/${node.product}.jpg`} alt={p.name} />}
       <div className="part-card-body">
         <div className="part-card-label">{node.label}</div>
         <div className="part-card-name">{p ? p.name : node.sub}</div>
@@ -176,16 +170,7 @@ export default function Assembled() {
           </g>
         );
       })}
-      {connections.filter((c) => c.perWire).map((c) => {
-        // one plug pair on every wire of the bundle (the motor's three bullet connectors)
-        const A = resolve(c.a), B = resolve(c.b);
-        const pa = anchor(A.node, A.port, "asm"), pb = anchor(B.node, B.port, "asm");
-        return WIRES[c.kind].colors.map((_, i) => {
-          const m = pointAt(wireCurve(pa, A.port.side, pb, B.port.side, c.kind, i), c.t ?? 0.5);
-          return <Pair key={`w-${c.a}-${i}`} a={A.port.plug} b={B.port.plug} x={m.x} y={m.y} angle={m.angle} scale={1.7} closed letters />;
-        });
-      })}
-      {connections.filter((c) => !c.atHeader && !c.perWire && resolve(c.a).port.plug && resolve(c.b).port.plug).map((c) => {
+      {connections.filter((c) => !c.atHeader && resolve(c.a).port.plug && resolve(c.b).port.plug).map((c) => {
         const A = resolve(c.a), B = resolve(c.b);
         const pa = anchor(A.node, A.port, "asm"), pb = anchor(B.node, B.port, "asm");
         const SCALE_PLUG = 1.2, GAP = closedGap(A.port.plug, B.port.plug);

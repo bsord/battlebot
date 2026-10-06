@@ -31,8 +31,8 @@ export default function WiringDiagram() {
       {/* Weapon ESC */}
       <rect className="box" x="500" y="40" width="170" height="95" rx="6"/>
       <text className="title" x="512" y="62">Weapon ESC</text>
-      <text className="small" x="512" y="80">FLYCOLOR 30A, 2-4S</text>
-      <text className="small" x="512" y="96">3.5mm bullets, 3A BEC</text>
+      <text className="small" x="512" y="80">30A, 2-4S, 3A UBEC</text>
+      <text className="small" x="512" y="96">motor soldered on</text>
       <text className="small" x="512" y="112">XT60 in, XT30 adapter</text>
       <path className="pos" d="M400 75 H500"/><circle className="dot-pos" cx="400" cy="75" r="4"/>
       <path className="neg" d="M420 95 H500"/><circle className="dot-neg" cx="420" cy="95" r="4"/>
@@ -49,11 +49,11 @@ export default function WiringDiagram() {
       {/* Weapon motor */}
       <circle className="box" cx="880" cy="88" r="46"/>
       <text className="title" x="850" y="84">Weapon</text>
-      <text className="small" x="850" y="100">2200KV</text>
-      <text className="small" x="940" y="60">QWinOut A2212 2200KV</text>
+      <text className="small" x="850" y="100">2300KV</text>
+      <text className="small" x="940" y="60">Readytosky RS2205 2300KV</text>
       <text className="small" x="940" y="76">3 wires, swap any 2</text>
       <text className="small" x="940" y="92">to reverse spin</text>
-      <text className="small" x="940" y="108">~24,400rpm on 3S</text>
+      <text className="small" x="940" y="108">~22-25k rpm on 3S</text>
       <path className="phase" d="M670 70 H840"/>
       <path className="phase" d="M670 88 H834"/>
       <path className="phase" d="M670 106 H840"/>

@@ -8,12 +8,6 @@ function Lipo({ x, y, w, h }) {
       <rect x={x + 12} y={y + 10} width={w - 24} height={h - 20} rx="3" fill="#2d4a78" />
       <text x={x + w / 2} y={y + h / 2 - 4} textAnchor="middle" className="art-text">3S 450mAh</text>
       <text x={x + w / 2} y={y + h / 2 + 12} textAnchor="middle" className="art-sub">11.1V LiPo</text>
-      {/* balance lead */}
-      <g>
-        <path d={`M${x + w - 30} ${y} C ${x + w - 30} ${y - 18}, ${x + w - 10} ${y - 14}, ${x + w - 4} ${y - 26}`}
-          stroke="#e6e6e6" strokeWidth="3" fill="none" />
-        <rect x={x + w - 14} y={y - 38} width="20" height="12" rx="1.5" fill="#f1eee4" stroke="#0005" strokeWidth="0.6" />
-      </g>
     </g>
   );
 }
@@ -94,6 +88,29 @@ function Receiver({ x, y, w, h }) {
   );
 }
 
+function Charger({ x, y, w, h }) {
+  // small 2S/3S balance charger: AC cord, two balance ports, status LEDs
+  return (
+    <g>
+      <path d={`M${x + 30} ${y} q 0 -24 30 -36`} stroke="#111" strokeWidth="4" fill="none" />
+      <rect x={x} y={y} width={w} height={h} rx="10" fill="#2a2d33" />
+      <rect x={x + 12} y={y + 12} width={w - 24} height={h - 50} rx="6" fill="#3a3e46" />
+      <text x={x + 24} y={y + 42} className="art-text">2S / 3S</text>
+      <text x={x + 24} y={y + 60} className="art-sub">LiPo balance charger</text>
+      {[0, 1].map((i) => (
+        <g key={i}>
+          <circle cx={x + w - 50 + i * 22} cy={y + 34} r="5" fill={i ? "#2fbf71" : "#e04848"} />
+        </g>
+      ))}
+      {/* balance ports along the bottom edge */}
+      <rect x={x + w * 0.45} y={y + h - 26} width="34" height="14" rx="2" fill="#f1eee4" />
+      <rect x={x + w * 0.8 - 20} y={y + h - 26} width="40" height="14" rx="2" fill="#f1eee4" />
+      <text x={x + w * 0.45 + 17} y={y + h - 31} textAnchor="middle" className="art-sub">2S</text>
+      <text x={x + w * 0.8} y={y + h - 31} textAnchor="middle" className="art-sub">3S</text>
+    </g>
+  );
+}
+
 function Transmitter({ x, y, w, h }) {
   const stick = (cx) => (
     <g>
@@ -169,6 +186,7 @@ export default function Art({ node }) {
     case "escSmall": return <Esc {...r} small />;
     case "rx": return <Receiver {...r} />;
     case "tx": return <Transmitter {...r} />;
+    case "charger": return <Charger {...r} />;
     case "bldc": return <Brushless {...r} />;
     case "n20": return <N20 {...r} />;
     case "wheel": return <Wheel {...r} />;
